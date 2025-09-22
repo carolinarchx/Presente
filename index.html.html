@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Aniversário da Sogra 🎂</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #8914a6, #5e093e, #fad4ec);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      color: #333;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .container {
+      margin-top: 50px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 20px;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #contador {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+      color: #5e093e;
+    }
+
+    .foto {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 4px solid #9b5de5;
+    }
+
+    .pix-box {
+      background: #fad4ec;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .pix-key {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 10px;
+      background: #5e093e;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #7a3ccf;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- FOTO DA SOGRA -->
+    <img src="foto-sogra.jpg" alt="Foto da Sogra" class="foto">
+
+    <h1> O Meu Aniversário Está Chegando!🎂 </h1>
+
+    <!-- CONTADOR -->
+    <div id="contador"></div>
+
+    <!-- PIX -->
+    <p>Use a chave abaixo se quiser me dar um pix de presente:</p>
+    <div class="pix-box">
+      <span class="pix-key">(71) 98395-4620</span><br>
+      <button onclick="copiarPix()">Copiar</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT DO CONTADOR -->
+  <script>
+    // Data do aniversário (exemplo: 25 de outubro de 2025, 00:00:00)
+    const dataAniversario = new Date("Oct 25, 2025 00:00:00").getTime();
+
+    const contador = setInterval(() => {
+      const agora = new Date().getTime();
+      const distancia = dataAniversario - agora;
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerHTML =
+        dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+      if (distancia < 0) {
+        clearInterval(contador);
+        document.getElementById("contador").innerHTML = "🎂 Feliz Aniversário 🎂";
+      }
+    }, 1000);
+
+    // Função de copiar Pix
+    function copiarPix() {
+      const chavePix = "(71) 98395-4620";
+      navigator.clipboard.writeText(chavePix).then(() => {
+        alert("Chave Pix copiada!");
+      });
+    }
+  </script>
+
+  <!-- SCRIPT DE CONFETES -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    function soltarConfete() {
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+    // Solta confete quando a página abre
+    window.onload = soltarConfete;
+  </script>
+
+</body>
+</html>
